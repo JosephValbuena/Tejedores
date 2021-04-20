@@ -1,0 +1,12 @@
+CREATE TABLE `test`.`tejido`(
+    `id` INT(255) NOT NULL AUTO_INCREMENT,
+    `titulo` VARCHAR(255) NOT NULL,
+    `descp` VARCHAR(255),
+    `precio` DOUBLE,
+    `ImagenTejido` VARCHAR(255) NULL,
+    `tipo` INT(2) NOT NULL,
+    `idUsuario` INT(255) NOT NULL,
+    `depend` INT(255) NOT NULL,
+    `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(`id`)
+) ENGINE = INNODB

@@ -2,6 +2,8 @@
   include('../Backend/conectar.php');
   $query = "select * from tejido";
   $resultado = mysqli_query($conn,$query);
+  
+  //%resultado2=
 ?>
 
 <!DOCTYPE html>
@@ -120,9 +122,9 @@
                 <!-- page-content" -->
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-8" >
             <?php foreach($resultado as $row){?>
-            <div class="card text-center mt-3">
+            <div class="card text-center mt-3" >
                 <div class="card-header text-start">
                     <div class="row">
                         <div class="col-1">
@@ -160,6 +162,38 @@
                     </div>
                     <div class="card-footer text-muted mt-2">
                         <p>COMENTARIOS</p>
+                        <div style="text-align: left;">
+                            <div>
+                            ¿Quieres opinar?
+                            </div>
+                            <div>
+                            
+                                <form class="comentForm" >
+                                    <input type="text" name="texto" class="comentSend" id= "<?php echo $row['idPublic']?>">
+                                    <input type="submit" value="Enviar comentario" name="comentar">                          
+                                </form>
+
+                            </div>
+                        </div>
+                        <?php
+                        $queryComents = "SELECT b.idPublic,b.titulo,b.tipo,b.idUsuario,b.depend,b.fecha,c.user de ,d.user para FROM `tejido` a INNER JOIN tejido b ON a.`idPublic` = b.depend INNER JOIN USER c ON c.id = b.idUsuario inner join user d on a.idUsuario= d.id where b.depend =" . $row['idPublic'];
+                        $resultado2 = mysqli_query($conn,$queryComents);
+                         foreach($resultado2 as $row2){?>
+                        <div style="text-align: left;">
+                            <div>
+                            Foto y nombre
+                            <p>De:<?php echo $row2['de'];?> Para:<?php echo $row2['para'];?></p>
+                            <h3></h3>
+                            </div> 
+                            comentario: 
+                            <p><?php echo $row2['titulo'];?></p>
+                            fecha <?php echo $row2['fecha'];?>
+                            </div>
+                            <div>
+                            <input type="button" value="Me gusta">
+                            </div>
+                            <?php }?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -167,7 +201,7 @@
         </div>
     </div>
 
-
+    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
         integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
     </script>
@@ -177,6 +211,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="scr.js"></script>
+    <script src="../Backend/coments.js"></script>
 </body>
 
 </html>

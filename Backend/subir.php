@@ -7,15 +7,17 @@
         $precio =$_POST['precio'];
         $imagen = $_FILES['imagenes']['name'];
 
+        
+
         if(isset($imagen) && $imagen != ""){
             $tipo = $_FILES['imagenes']['type'];
             $temp = $_FILES['imagenes']['tmp_name'];
 
             if( !((strpos($tipo,'gif') || strpos($tipo,'jpeg') || strpos($tipo,'webp')))){
                $_SESSION['mensaje'] = 'solo se permite archivos jpeg, gif, webp';
-               header('location:../subirTejido.php'); 
+               header('location:../subirTejido.php'); //direción relativa no absoluta, puede dar errores en algunos navegadores
             }else{
-                $query = "INSERT INTO tejido(id,titulo,descp,precio,ImagenTejido) values ('','$titulo','$descp','$precio','$imagen')";
+                $query = "INSERT INTO tejido(titulo,descp,precio,ImagenTejido,tipo,idUsuario) values ('$titulo','$descp','$precio','$imagen',1,1)";
                 $resultado = mysqli_query($conn,$query);
 
                 if($resultado){
