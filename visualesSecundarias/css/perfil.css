@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.body {
+    background: #989898;
+}
+
+.banner {
+    background-size: cover;
+}
+
+.banner img {
+    width: 100%;
+    height: 140px;
+}
+
+.contenedor {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.banner {
+    position: absolute;
+}
+
+.datosBasicos {
+    display: flex;
+    position: absolute;
+    background: #212529;
+    width: 90%;
+    padding: 30px;
+    top: 20px;
+    border-radius: 10px;
+}
+
+.datos {
+    display: flex;
+    width: 100%;
+    border-right: 1px solid #CDCDCD;
+}
+
+.datos h2 {
+    font-family: 'Lobster', cursive;
+    color: white;
+}
+
+.datos a {
+    margin-right: 15px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+}
+
+.datos img {
+    width: 200px;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.estado {
+    font-size: 24px;
+}
+
+.datosBasicos .datosPrincipales .muted {
+    color: #A1A1A1;
+    font-family: 'Roboto', sans-serif;
+}
+
+.datosPrincipales {
+    margin-top: 10px;
+}
+
+.descripcion {
+    width: 100%;
+    margin-left: 10px;
+    justify-content: center;
+}
+
+.descripcion p {
+    color: white;
+    margin: 30px 20px 30px 30px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.descripcion .redes {
+    margin: 60px 0px 0px 30px;
+}
+
+.cambiar {
+    display: flex;
+    align-content: space-between;
+}
+
+.cambiar a {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+.redes a {
+    text-decoration: none;
+    color: #A1A1A1;
+    padding: 0 40px 0 0;
+    font-size: 30px;
+}
+
+
+/*------------ PORTAFOLIO ---------------*/
+
+.portafolio {
+    position: absolute;
+    top: 330px;
+    background: #212529;
+    width: 90%;
+    border-radius: 10px;
+    padding-bottom: 25px;
+}
+
+.portHeader {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 20px;
+}
+
+.portHeader h4 {
+    margin: 0;
+}
+
+.portHeader a {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+.portafolio hr {
+    color: #CDCDCD;
+    margin: 0px 0px 10px 0;
+}
+
+.porta {
+    height: 35vh;
+    overflow: auto !important;
+}
+
+
+/*----- Comentarios -----*/
+
+.comentarios {
+    position: absolute;
+    top: 680px;
+    background: #212529;
+    width: 90%;
+    border-radius: 10px;
+    padding-bottom: 15px !important;
+}
+
+.comentarios hr {
+    color: #CDCDCD;
+    margin: 0px 0px 10px 0;
+}
+
+.comentariosHeader {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 20px;
+}
+
+.comentariosHeader a {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+.coments {
+    height: 30vh;
+    overflow: auto;
+}
+
+.labelComenPerfil {
+    width: 100% !important;
+}
+
+.box-comment {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border-bottom: 1px rgb(109, 109, 109) solid;
+    margin: 5px 15px 15px 15px;
+}
+
+.box-comment img {
+    width: 35px !important;
+    height: 35px !important;
+    border-radius: 50% !important;
+}
+
+.comment-information {
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+}
+
+.username {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    margin-left: 10px;
+    color: white;
+}
+
+.comment-text {
+    color: white;
+    margin: 10px;
+}
