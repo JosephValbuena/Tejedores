@@ -16,5 +16,7 @@
 
     $insert2 = mysqli_query($conn,"INSERT INTO notificaciones (user1, user2, tipo, leido, fecha, idPubli) VALUES ('$usuario','$usuario2','ha comentado','0','$fecha','$publicacion')");
 
+    
+
 
 ?>

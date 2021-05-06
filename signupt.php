@@ -1,3 +1,23 @@
+<?php
+    session_start();
+    include('../ProyectoFinal/Backend/conectar.php');
+
+    if(isset($_POST['submit'])){
+        $flag = true;
+        $nombre = $_POST['nombre'];
+        $correo = $_POST['correo'];
+        $passw = $_POST['passw'];
+        $descp = $_POST['descp'];
+        $foto = $_FILES['foto']['name'];
+        $tipoimg = $_FILES['foto']['type'];
+        $temp = $_FILES['foto']['tmp_name'];
+        $tipo = $_POST['tipo'];
+        $facebook = $_POST['facebook'];
+        $twitter = $_POST['twitter'];
+        $instagram = $_POST['instagram'];
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -25,14 +45,17 @@
         <p>ARTESANIX</p>
     </div>
     <div class="content">
+        <?php
+            include('../ProyectoFinal/Backend/validar-form.php');  
+        ?>
         <h1>Registrarse</h1>
-        <form action="Backend/signup.php" method="POST" enctype="multipart/form-data">
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);  ?>" method="POST" enctype="multipart/form-data">
             <label for="nombre">Nombre</label><br>
-            <input type="text" name="nombre" id="nombre" placeholder="Jose Posada" required><br>
+            <input type="text" name="nombre" id="nombre" placeholder="Jose Posada" value="<?php if(isset($nombre)){ echo $nombre; } ?>" required><br>
             <label for="correo">Correo Electrónico</label><br>
-            <input type="email" name="correo" id="correo" placeholder="Jose@example.com" required><br>
+            <input type="email" name="correo" id="correo" placeholder="Jose@example.com" value ="<?php if(isset($correo)){ echo $correo; } ?>" required><br>
             <label for="passw">Contraseña</label><br>
-            <input type="password" name="passw" id="passw" placeholder="**********" required><br>
+            <input type="password" name="passw" id="passw" placeholder="**********"  value="<?php if(isset($passw)){ echo $passw; } ?>" required><br>
             <label for="descp">Cuentanos, ¿Quién eres?</label><br>
             <textarea name="descp" id="descp" cols="20" rows="3" placeholder="Tu descripción" maxlength="180" required></textarea><br>
             <label for="foto">Selecciona tu foto de perfil</label><br>
@@ -40,13 +63,14 @@
             <input type="hidden" id="tipo" name="tipo" value="t">
             <div class="redes">
                 <label for="facebook"><i class="fab fa-facebook"></i></label>
-                <input type="url" name="facebook" id="facebook" placeholder="Link hacia tu Facebook">
+                <input type="url" name="facebook" id="facebook" value="<?php if(isset($facebook)){ echo $facebook; } ?>" placeholder="Link hacia tu Facebook">
                 <label for="twitter"><i class="fab fa-twitter"></i></label>
-                <input type="url" name="twitter" id="twitter" placeholder="Link hacia tu Twitter">
+                <input type="url" name="twitter" id="twitter" value="<?php if(isset($twitter)){ echo $twitter; } ?>" placeholder="Link hacia tu Twitter">
                 <label for="instagram"><i class="fab fa-instagram"></i></label>
-                <input type="url" name="instagram" id="instagram" placeholder="Link hacia tu Instagram">
+                <input type="url" name="instagram" id="instagram" value="<?php if(isset($instagram)){ echo $instagram; } ?>" placeholder="Link hacia tu Instagram">
             </div>
-            <button class="button btn btn-outline-dark" type="submit">Registrarse</button>
+            <input class="button btn btn-outline-dark" type="submit" name="submit" value="Registrarse"></input>
+            
         </form>
     </div>
 
@@ -57,7 +81,7 @@
     </script>
 
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfYV78aAAAAAP8uvITsCHsBHC8HrUTWmIg6JOlB"></script><script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfYV78aAAAAAP8uvITsCHsBHC8HrUTWmIg6JOlB"></script>
 </body>
 
 </html>

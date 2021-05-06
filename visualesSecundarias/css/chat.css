@@ -643,3 +643,18 @@ a {
     color: white;
     margin: 12px 0 0 30px;
 }
+
+.marcarcomoleido {
+    display: flex;
+    justify-content: center;
+}
+
+#marcarCL {
+    cursor: pointer;
+    width: auto;
+    color: #D3D3D4;
+    text-decoration: none;
+    margin: 10px 0 10px 0;
+    text-decoration: underline #D3D3D4 solid;
+    font-size: 12px;
+}

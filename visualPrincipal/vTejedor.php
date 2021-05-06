@@ -8,12 +8,12 @@
     if(isset($_SESSION['user_id'])){
 
         //Obtener publicaciones
-        $query = "select * from tejido";
+        $query = "select * from tejido ORDER BY idPubli desc";
         $stmt = mysqli_query($conn,$query);
     
         //Obtener los datos del usuario
 
-        $query2 = "select * from usuarios where id = ?";
+        $query2 = "select * from usuarios where id = ? ";
         $records = mysqli_prepare($conn,$query2);
         $stmt2 = mysqli_stmt_bind_param($records,'i',$_SESSION['user_id']);
         mysqli_stmt_execute($records);
@@ -119,7 +119,7 @@
                                                 $contNoti = null;
                                                 while($no = mysqli_fetch_array($noti,MYSQLI_ASSOC)){
                                                     
-                                                    $contNoti = mysqli_num_rows($no);
+                                                    $contNoti = mysqli_num_rows($noti);
                                                     $userNoti = mysqli_query($conn,"SELECT * FROM usuarios WHERE id = '".$no['user1']."'");
                                                     $fetchUser1 = mysqli_fetch_array($userNoti,MYSQLI_ASSOC);
 
@@ -274,14 +274,15 @@
                         <?php } ?>
 
                         <?php if($numcomen > 2) { echo "<br><center> Ver todos los comentarios </center>"; } ?>
-                        <form action="" method="post">
-                            <label class="labelComentario" id="record-<?php echo $row['idPubli'];?>" for="comentar">Comentar
+                        <form action="" method="post" id="record-<?php echo $row['idPubli'];?>">
+                            <label class="labelComentario" for="comentar">Comentar
                             <input class="form-control enviar-btn" type="text" name="comentario" id="comentario-<?php echo $row['idPubli'];?>" placeholder="Escribe un comentario">
                             </label>
                             <input type="hidden" name="usuario" id="usuario" value="<?php echo $id;?>">
                             <input type="hidden" name="publicacion" id="publicacion" value="<?php echo $row['idPubli'];?>">
                             <input type="hidden" name="foto" id="foto" value="<?php echo $foto;?>">
                             <input type="hidden" name="nombre" id="nombre" value="<?php echo $nombre;?>">
+                            <input class="btn btn-primary comentarAqui" type="submit" value="Comentar">
                         </form>
                     </div>
                 </div>
@@ -304,7 +305,7 @@
     <script>
         $(document).ready(function() {
             $("#marcarCL").click(function(){
-                var id = <?php echo $_SESSION['user_id']; ?>;
+                var id = <?php echo $_SESSION['user_id']; ?>; 
                 $.ajax({
                     url: 'http://localhost/ProyectoFinal/Backend/mtcl.php',
                     method: 'POST',

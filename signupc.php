@@ -1,3 +1,23 @@
+<?php
+    session_start();
+    include('../ProyectoFinal/Backend/conectar.php');
+
+    if(isset($_POST['submit'])){
+        $flag = true;
+        $nombre = $_POST['nombre'];
+        $correo = $_POST['correo'];
+        $passw = $_POST['passw'];
+        $descp = $_POST['descp'];
+        $foto = $_FILES['foto']['name'];
+        $tipoimg = $_FILES['foto']['type'];
+        $temp = $_FILES['foto']['tmp_name'];
+        $tipo = $_POST['tipo'];
+        $facebook = $_POST['facebook'];
+        $twitter = $_POST['twitter'];
+        $instagram = $_POST['instagram'];
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -26,8 +46,11 @@
         <p>ARTESANIX</p>
     </div>
     <div class="content">
+        <?php
+            include('../ProyectoFinal/Backend/validar-form.php');  
+        ?>
         <h1>Registrarse</h1>
-        <form action="Backend/signup.php" method="POST" enctype="multipart/form-data">
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);  ?>" method="POST" enctype="multipart/form-data">
             <label for="nombre">Nombre</label><br>
             <input type="text" name="nombre" id="nombre" placeholder="Jose Posada" required><br>
             <label for="correo">Correo Electrónico</label><br>
@@ -47,7 +70,7 @@
                 <label for="instagram"><i class="fab fa-instagram"></i></label>
                 <input type="url" name="instagram" id="instagram" placeholder="Link hacia tu Instagram">
             </div>
-            <button class="button btn btn-outline-dark" type="submit">Registrarse</button>
+            <input class="button btn btn-outline-dark" type="submit" value="Registrarse" name="submit"></input>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -60,7 +83,7 @@
     </script>
 
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfYV78aAAAAAP8uvITsCHsBHC8HrUTWmIg6JOlB"></script><script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfYV78aAAAAAP8uvITsCHsBHC8HrUTWmIg6JOlB"></script>
 
 
 </body>

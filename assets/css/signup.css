@@ -110,3 +110,7 @@ form textarea {
     font-family: 'Roboto', sans-serif;
     border-radius: 5px;
 }
+
+.msgerror {
+    margin: 5px 20px !important;
+}

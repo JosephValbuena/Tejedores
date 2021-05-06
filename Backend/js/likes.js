@@ -2,7 +2,7 @@ $(document).ready(function() {
     $(".like").click(function() {
         var id = this.id;
         $.ajax({
-            url: 'http://localhost/ProyectoFinal/Backend/megusta.php',
+            url: '/ProyectoFinal/Backend/megusta.php',
             method: 'POST',
             data: { id: id },
             dataType: 'json',

@@ -1,6 +1,4 @@
 <?php 
-
-//esto es una prueba 
   session_start();
   include('../Backend/conectar.php');
 
@@ -121,7 +119,7 @@
                                     <div class="sidebar-submenu">
                                         <div class="list-group">
                                             <?php
-                                                $noti = mysqli_query($conn, "SELECT * from notificaciones WHERE user2 = '".$_SESSION['user_id']."' AND leido = 0 ORDER BY id_not desc");
+                                                $noti = mysqli_query($conn, "SELECT * from notificaciones WHERE user2 = '".$_SESSION['user_id']."' AND leido = 0 ");
                                                 $contNoti = null;
                                                 while($no = mysqli_fetch_array($noti,MYSQLI_ASSOC)){
                                                     
@@ -166,6 +164,13 @@
             </div>
         </div>
         <div class="col-8">
+
+            <?php
+                $verificar = mysqli_query($conn, "SELECT * FROM vetados");
+                $contar = mysqli_num_rows($verificar);
+
+                if($contar > 0){
+            ?>
             <div class="tabla">
                 <table class="table table-dark table-striped">
                     <thead>
@@ -179,7 +184,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        $obtDatos = mysqli_query($conn,"SELECT * FROM usuarios");
+                        $obtDatos = mysqli_query($conn,"SELECT * FROM vetados");
                     ?>
 
                         <?php foreach($obtDatos as $row){ 
@@ -192,8 +197,7 @@
                             <td><?=$row['nombre']?></td>
                             <td><?=$row['correo']?></td>
                             <td id="need-<?=$row['id']?>">
-                                <a class="editar btn-editar" id="editarP" href="#"><i class="fas fa-pen"></i></a>
-                                <a class="eliminar btn-eliminar" href="#"><i class="fas fa-times"></i></a>
+                                <a class="editar btn-volver" id="volverP" href="#"><i class="fas fa-check"></i></a>
                             </td>
                         </tr>
                         <?php  
@@ -204,39 +208,31 @@
                 </table>
             </div>
 
-        </div>
-    </div>
+            <?php
+                }else {
+            ?>
 
-
-    <div class="overlay ">
-        <div class="popup">
-            <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
-            <h3>Editar Usuario</h3>
-            <form action="/ProyectoFinal/Backend/editarPersona.php" method="POST">
-                <?php
-                    
-                ?>
-                <div class="contenedor-inputs">
-                    <input type="hidden" name="idPersona" class="idPersona" id="idPersona">
-                    <label for="nombre">Nombre Nuevo</label><br>
-                    <input type="text" name="nombre" id="nombre"><br>
-                    <label for="email">Correo Nuevo</label><br>
-                    <input type="email" name="email" id="email"><br>
-                    <label for="descp">Nueva descripción</label><br>
-                    <textarea name="descp" id="descp" cols="20" rows="3" maxlength="180"></textarea><br>
-                    <input type="submit" class="btn-submit" value="Realizar edit">
+            <div class="cerov">
+                <div class="contenido">
+                    <img src="/ProyectoFinal/Backend/imagenes/imgNoHay.png" width="200px" height="200px"
+                        alt="Imagen ilustrativa">
+                    <h3>¡Aún no hay usuarios vetados!</h3>
+                    <p>Es mejor así, ¿no lo crees?</p>
                 </div>
-            </form>
+            </div>
+
+            <?php } ?>
         </div>
     </div>
 
-    <div class="overlay2">
-        <div class="popup2">
-            <a href="#" id="btn-cerrar-popup2" class="btn-cerrar-popup2"><i class="fas fa-times"></i></a>
-            <h3>¿Seguro desea vetar el usuario?</h3>
-            <form action="/ProyectoFinal/Backend/eliminarUsuario.php" method="POST">
-                <input type="hidden" name="idPersona2" class="idPersona2" id="idPersona2">
-                <input type="submit" class="btn-submit2" value="Eliminar">
+
+    <div class="overlay3">
+        <div class="popup3">
+            <a href="#" id="btn-cerrar-popup3" class="btn-cerrar-popup3"><i class="fas fa-times"></i></a>
+            <h3>¿Seguro desea quitar el estado de vetado al usuario?</h3>
+            <form action="/ProyectoFinal/Backend/quitarVetado.php" method="POST">
+                <input type="hidden" name="idPersona3" class="idPersona3" id="idPersona3">
+                <input type="submit" class="btn-submit3" value="quitar vetado">
             </form>
         </div>
     </div>
@@ -253,28 +249,17 @@
 
     <script>
     $(document).ready(function() {
-        $('.btn-editar').click(function() {
+
+        $('.btn-volver').click(function() {
             var getpID = $(this).parent().attr('id').replace('need-', '');
-            $('.idPersona').val(getpID);
-            $('.overlay').addClass("active");
-            $('.popup').addClass("active");
+            $('.idPersona3').val(getpID);
+            $('.overlay3').addClass("active");
+            $('.popup3').addClass("active");
         });
 
-        $('.btn-cerrar-popup').click(function() {
-            $('.overlay').removeClass("active");
-            $('popup').removeClass("active");
-        });
-
-        $('.btn-eliminar').click(function() {
-            var getpID = $(this).parent().attr('id').replace('need-', '');
-            $('.idPersona2').val(getpID);
-            $('.overlay2').addClass("active");
-            $('.popup2').addClass("active");
-        });
-
-        $('.btn-cerrar-popup2').click(function() {
-            $('.overlay2').removeClass("active");
-            $('popup2').removeClass("active");
+        $('.btn-cerrar-popup3').click(function() {
+            $('.overlay3').removeClass("active");
+            $('popup3').removeClass("active");
         });
     });
     </script>

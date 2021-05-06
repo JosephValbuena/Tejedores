@@ -254,14 +254,15 @@
                         <?php } ?>
 
                         <?php if($numcomen > 2) { echo "<br><center> Ver todos los comentarios </center>"; } ?>
-                        <form action="" method="post">
-                            <label class="labelComentario" id="record-<?php echo $row['idPubli'];?>" for="comentar">Comentar
+                        <form action="" method="post" id="record-<?php echo $row['idPubli'];?>">
+                            <label class="labelComentario" for="comentar">Comentar
                             <input class="form-control enviar-btn" type="text" name="comentario" id="comentario-<?php echo $row['idPubli'];?>" placeholder="Escribe un comentario">
                             </label>
                             <input type="hidden" name="usuario" id="usuario" value="<?php echo $id;?>">
                             <input type="hidden" name="publicacion" id="publicacion" value="<?php echo $row['idPubli'];?>">
                             <input type="hidden" name="foto" id="foto" value="<?php echo $foto;?>">
                             <input type="hidden" name="nombre" id="nombre" value="<?php echo $nombre;?>">
+                            <input class="btn btn-primary comentarAqui" type="submit" value="Comentar">
                         </form>
                     </div>
                 </div>

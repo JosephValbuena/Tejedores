@@ -80,7 +80,7 @@
                                                 <a href="../visualesSecundarias/lista.php">Lista de Usuarios</a>
                                             </li>
                                             <li>
-                                                <a href="#">Usuarios vetados</a>
+                                                <a href="../visualesSecundarias/vetados.php">Usuarios vetados</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -110,7 +110,7 @@
                                                 $contNoti = null;
                                                 while($no = mysqli_fetch_array($noti,MYSQLI_ASSOC)){
                                                     
-                                                    $contNoti = mysqli_num_rows($no);
+                                                    $contNoti = mysqli_num_rows($noti);
                                                     $userNoti = mysqli_query($conn,"SELECT * FROM usuarios WHERE id = '".$no['user1']."'");
                                                     $fetchUser1 = mysqli_fetch_array($userNoti,MYSQLI_ASSOC);
 
@@ -157,8 +157,8 @@
                 $user = mysqli_real_escape_string($conn,$_GET['usuario']);
                 $sees = $_SESSION['user_id'];
                 $chats = mysqli_query($conn,"SELECT * FROM chats WHERE de = '$user' AND para = '$sees' OR de = '$sees' AND para = '$user'");
-            ?> 
-            
+            ?>
+
             <?php 
                 $obtUser = mysqli_query($conn, "SELECT * FROM usuarios where id = '$user'");
                 $obtFetch = mysqli_fetch_array($obtUser,MYSQLI_ASSOC);
@@ -166,14 +166,13 @@
 
             <div class="chateo">
                 <div class="chateoHeader">
-                    <img src="/ProyectoFinal/Backend/imagenes/usuarios/<?=$obtFetch['foto']?>"
-                        alt="">
+                    <img src="/ProyectoFinal/Backend/imagenes/usuarios/<?=$obtFetch['foto']?>" alt="">
                     <p><?=$obtFetch['nombre']?></p>
                 </div>
                 <hr>
 
                 <div class="mensajesEntrantes">
-                <?php while($ch = mysqli_fetch_array($chats,MYSQLI_ASSOC)){ ?>
+                    <?php while($ch = mysqli_fetch_array($chats,MYSQLI_ASSOC)){ ?>
                     <?php if($ch['de'] == $user){  ?>
                     <div class="izquierda">
                         <p><?php echo $ch['mensaje'];?></p>
@@ -182,15 +181,16 @@
                     <div class="derecha ">
                         <p><?php echo $ch['mensaje'];?></p>
                     </div>
-                    
+
                     <?php } ?>
 
-                <?php } ?> 
+                    <?php } ?>
                 </div>
-            
+
                 <div class="envMensajes">
                     <form action="" method="post">
-                        <input type="text" class="envmensaje" name="envmensaje" id="envmensaje" placeholder="Escribe un mensaje">
+                        <input type="text" class="envmensaje" name="envmensaje" id="envmensaje"
+                            placeholder="Escribe un mensaje">
                         <input type="submit" name="enviar" class="btn btn-primary btn-sm enviar"></input>
                     </form>
                 </div>
@@ -239,19 +239,24 @@
             <h4>Chats</h4>
             <hr>
             <?php
-                $obtChats = mysqli_query($conn,"SELECT para FROM c_chats where de = '$sees'");
+                $obtChats = mysqli_query($conn,"SELECT * FROM c_chats where de = '$sees' OR para = '$sees'");
+                
 
                 while($chatsFetch = mysqli_fetch_array($obtChats, MYSQLI_ASSOC)){
 
-                    $idPerWChat = $chatsFetch['para'];
-                    $obtInfo = mysqli_query($conn, "SELECT * FROM usuarios WHERE id = '$idPerWChat'");
+                    if($chatsFetch['para'] == $sees){
+                        $idPerWChat = $chatsFetch['de'];
+                        $obtInfo = mysqli_query($conn, "SELECT * FROM usuarios WHERE id = '$idPerWChat'");
+                    }else if($chatsFetch['de'] == $sees){
+                        $idPerWChat = $chatsFetch['para'];
+                        $obtInfo = mysqli_query($conn, "SELECT * FROM usuarios WHERE id = '$idPerWChat'");
+                    }
 
                     $obtInfoFetch = mysqli_fetch_array($obtInfo, MYSQLI_ASSOC);
             ?>
             <a href="/ProyectoFinal/visualesSecundarias/chatAdmin.php?usuario=<?php echo $obtInfoFetch['id']; ?>">
                 <div class="burbuja">
-                    <img src="/ProyectoFinal/Backend/imagenes/usuarios/<?=$obtInfoFetch['foto']?>"
-                        alt="User picture">
+                    <img src="/ProyectoFinal/Backend/imagenes/usuarios/<?=$obtInfoFetch['foto']?>" alt="User picture">
                     <p><?php echo $obtInfoFetch['nombre']; ?></p>
                     <i class="far fa-comment"></i>
                 </div>
@@ -274,6 +279,26 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="js/chat.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        $("#marcarCL").click(function() {
+            var id = <?php echo $_SESSION['user_id']; ?>;
+            $.ajax({
+                url: 'http://localhost/ProyectoFinal/Backend/mtcl.php',
+                method: 'POST',
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                success: function(data) {
+                    var seHizo = data['notiAct'];
+                    alert(seHizo);
+                }
+            });
+        });
+    });
+    </script>
 </body>
 
 </html>

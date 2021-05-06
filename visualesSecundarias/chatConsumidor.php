@@ -218,12 +218,18 @@
             <h4>Chats</h4>
             <hr>
             <?php
-                $obtChats = mysqli_query($conn,"SELECT para FROM c_chats where de = '$sees'");
+                $obtChats = mysqli_query($conn,"SELECT * FROM c_chats where de = '$sees' OR para = '$sees'");
+                
 
                 while($chatsFetch = mysqli_fetch_array($obtChats, MYSQLI_ASSOC)){
 
-                    $idPerWChat = $chatsFetch['para'];
-                    $obtInfo = mysqli_query($conn, "SELECT * FROM usuarios WHERE id = '$idPerWChat'");
+                    if($chatsFetch['para'] == $sees){
+                        $idPerWChat = $chatsFetch['de'];
+                        $obtInfo = mysqli_query($conn, "SELECT * FROM usuarios WHERE id = '$idPerWChat'");
+                    }else if($chatsFetch['de'] == $sees){
+                        $idPerWChat = $chatsFetch['para'];
+                        $obtInfo = mysqli_query($conn, "SELECT * FROM usuarios WHERE id = '$idPerWChat'");
+                    }
 
                     $obtInfoFetch = mysqli_fetch_array($obtInfo, MYSQLI_ASSOC);
             ?>

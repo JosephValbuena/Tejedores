@@ -17,7 +17,6 @@
     
                 if( !((strpos($tipo,'gif') || strpos($tipo,'jpeg') || strpos($tipo,'webp')))){
                    $_SESSION['mensaje'] = 'solo se permite archivos jpeg, gif, webp';
-                   header('location:../subirTejido.php'); 
                 }else{
                     $query = "INSERT INTO tejido(idPubli,id_user,titulo,descp,precio,ImagenTejido,fechaP) values ('','$userId','$titulo','$descp','$precio','$imagen','$fecha')";
                     $resultado = mysqli_query($conn,$query);
