@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.body {
+    background: #212529;
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 1rem;
+    color: white;
+}
+
+.header {
+    display: flex;
+    color: white;
+    width: 100%;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+}
+
+.header i {
+    margin: 6px 3px 0 15px;
+    font-size: 24px;
+}
+
+.header p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+
+.formulario {
+    background: rgb(255, 255, 255);
+    width: 70%;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 14px 28px rgba(194, 194, 194, 0.25), 0 10px 10px rgba(194, 194, 194, 0.22);
+}
+
+.formulario label {
+    font-family: 'Lobster', cursive;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.radios {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: normal !important;
+}

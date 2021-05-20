@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200i,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+body {
+    background: #0f0c29;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+label,
+input,
+h2,
+p {
+    color: #f3f3f3;
+}
+
+.nombreEmpresa {
+    font-family: 'Lobster', cursive;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    padding-bottom: 3px;
+    margin: 5px 1px;
+}
+
+.principal {
+    font-family: 'Poppins', sans-serif;
+}
+
+.formSubir {
+    margin: 10px 20%;
+    padding: 15px;
+    /* border: 2px solid rgb(189, 189, 189); */
+    border-radius: 10px;
+    background-color: rgba(27, 27, 50, 0.8);
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
